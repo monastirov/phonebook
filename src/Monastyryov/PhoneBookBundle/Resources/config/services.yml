@@ -5,3 +5,7 @@ imports:
 parameters:
 
 services:
+    phone_book.service.record:
+      class: Monastyryov\PhoneBookBundle\Service\RecordService
+      arguments:
+          - phone_book.repository.record
