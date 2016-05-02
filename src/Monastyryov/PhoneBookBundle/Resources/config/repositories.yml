@@ -1,3 +1,14 @@
 parameters:
 
 services:
+    phone_book.repository.city:
+        class: Monastyryov\PhoneBookBundle\Repository\CityRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+           - Monastyryov\PhoneBookBundle\Entity\City
+
+    phone_book.repository.street:
+        class: Monastyryov\PhoneBookBundle\Repository\StreetRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+           - Monastyryov\PhoneBookBundle\Entity\Street
