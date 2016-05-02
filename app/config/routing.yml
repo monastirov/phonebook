@@ -1,2 +1,5 @@
 phone_book:
     resource: "@PhoneBookBundle/Resources/config/routing.yml"
+
+phone_book_api:
+    resource: "@PhoneBookApiBundle/Resources/config/routing.yml"
