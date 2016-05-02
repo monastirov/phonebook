@@ -1,3 +1,2 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+phone_book:
+    resource: "@PhoneBookBundle/Resources/config/routing.yml"

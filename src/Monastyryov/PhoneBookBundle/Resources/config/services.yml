@@ -1,0 +1,7 @@
+imports:
+    - { resource: factories.yml }
+    - { resource: repositories.yml }
+
+parameters:
+
+services:
