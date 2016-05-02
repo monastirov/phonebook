@@ -12,3 +12,9 @@ services:
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
            - Monastyryov\PhoneBookBundle\Entity\Street
+
+    phone_book.repository.record:
+        class: Monastyryov\PhoneBookBundle\Repository\RecordRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+           - Monastyryov\PhoneBookBundle\Entity\Record
