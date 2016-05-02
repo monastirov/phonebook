@@ -2,6 +2,7 @@
 
 namespace Monastyryov\PhoneBookBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +33,20 @@ class Street
     protected $city;
 
     /**
+     * @var Record[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="Monastyryov\PhoneBookBundle\Entity\Record", mappedBy="street")
+     */
+    protected $records;
+
+    /**
+     * Street constructor.
+     */
+    public function __construct()
+    {
+        $this->records = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -45,7 +60,7 @@ class Street
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
 
         return $this;
     }
@@ -64,7 +79,7 @@ class Street
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = (string) $title;
 
         return $this;
     }
@@ -81,7 +96,7 @@ class Street
      * @param City $city
      * @return $this
      */
-    public function setCity($city)
+    public function setCity(City $city)
     {
         $this->city = $city;
 
