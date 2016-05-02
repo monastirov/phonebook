@@ -53,7 +53,7 @@ class City
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
 
         return $this;
     }
@@ -72,7 +72,7 @@ class City
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = (string) $title;
 
         return $this;
     }
@@ -89,7 +89,7 @@ class City
      * @param ArrayCollection|Street[] $streets
      * @return $this
      */
-    public function setStreets($streets)
+    public function setStreets(ArrayCollection $streets)
     {
         $this->streets = $streets;
 
