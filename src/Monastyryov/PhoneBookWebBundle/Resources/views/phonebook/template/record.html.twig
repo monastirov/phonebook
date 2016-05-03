@@ -2,5 +2,8 @@
     <td><%=name %></td>
     <td><%=surname %></td>
     <td><%=patronymic %></td>
+    <td><% print(new Date(birth_timestamp*1000)) %></td>
     <td><%=phone_number %></td>
+    <td><%=street.title %></td>
+    <td><%=street.city.title %></td>
 </script>
