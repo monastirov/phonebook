@@ -2,5 +2,5 @@ services:
     phone_book.factory.record:
         class: Monastyryov\PhoneBookBundle\Factory\RecordFactory
         arguments:
-            - "@phone_book.repository.street"
+            - "@phone_book.service.street"
             - "@logger"

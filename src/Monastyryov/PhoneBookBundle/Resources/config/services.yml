@@ -6,8 +6,15 @@ parameters:
 
 services:
     phone_book.service.record:
-      class: Monastyryov\PhoneBookBundle\Service\RecordService
-      arguments:
-          - "@phone_book.repository.record"
-          - "@phone_book.factory.record"
-          - "@logger"
+        class: Monastyryov\PhoneBookBundle\Service\RecordService
+        arguments:
+            - "@phone_book.repository.record"
+            - "@phone_book.service.street"
+            - "@phone_book.factory.record"
+            - "@logger"
+
+    phone_book.service.street:
+        class: Monastyryov\PhoneBookBundle\Service\StreetService
+        arguments:
+            - "@phone_book.repository.street"
+            - "@logger"

@@ -4,7 +4,6 @@ namespace Monastyryov\PhoneBookApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Monastyryov\PhoneBookApiBundle\Form\Type\RecordRequestType;
-use Monastyryov\PhoneBookBundle\Entity\Record;
 use Monastyryov\PhoneBookBundle\Request\RecordRequest;
 use Monastyryov\PhoneBookBundle\Service\RecordService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,6 +56,28 @@ class RecordController extends FOSRestController
         $view = $this->view()->setFormat('json')->setStatusCode(400);
         if ($form->isValid()) {
             $this->recordService->createRecordByRequest($record);
+            $view->setStatusCode(200);
+            return $this->handleView($view);
+        }
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Route("/phone_book/records", name="phone_book_api.record.update")
+     * @Method({"PUT"})
+     * @param Request $request
+     * @return Response
+     */
+    public function updateRecord(Request $request)
+    {
+        $record = new RecordRequest();
+        $form = $this->createForm(RecordRequestType::class, $record);
+        $form->handleRequest($request);
+
+        $view = $this->view()->setFormat('json')->setStatusCode(400);
+        if ($form->isValid()) {
+            $this->recordService->updateRecord($record);
             $view->setStatusCode(200);
             return $this->handleView($view);
         }

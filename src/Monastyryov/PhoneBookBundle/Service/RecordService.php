@@ -26,21 +26,27 @@ class RecordService
     /** @var RecordFactory */
     protected $recordFactory;
 
+    /** @var StreetService */
+    protected $streetService;
+
     /**
      * RecordService constructor.
      * @param RecordRepository $recordRepository
+     * @param StreetService $streetService
      * @param RecordFactory $recordFactory
      * @param LoggerInterface $logger
      * @internal param StreetRepository $streetRepository
      */
     public function __construct(
         RecordRepository $recordRepository,
+        StreetService $streetService,
         RecordFactory $recordFactory,
         LoggerInterface $logger
     ) {
         $this->recordRepository = $recordRepository;
         $this->logger = $logger;
         $this->recordFactory = $recordFactory;
+        $this->streetService = $streetService;
     }
 
     /**
@@ -64,20 +70,23 @@ class RecordService
     }
 
     /**
-     * @param Record $record
+     * @param RecordRequest $recordRequest
      * @throws IdentificationNotFoundException
      */
-    public function updateRecord(Record $record)
+    public function updateRecord(RecordRequest $recordRequest)
     {
-        $recordFound = $this->getRecordById($record->getId());
+        $recordFound = $this->getRecordById($recordRequest->getId());
+        $street = $this->streetService->getStreetById($recordRequest->getStreetId());
+        $birthDatetime = new \DateTime();
+        $birthDatetime->setTimestamp($recordRequest->getBirthTimestamp());
 
         $recordFound
-            ->setBirthDatetime($record->getBirthDatetime())
-            ->setName($record->getName())
-            ->setPatronymic($record->getPatronymic())
-            ->setPhoneNumber($record->getPhoneNumber())
-            ->setStreet($record->getStreet())
-            ->setSurname($record->getSurname());
+            ->setBirthDatetime($birthDatetime)
+            ->setName($recordRequest->getName())
+            ->setPatronymic($recordRequest->getPatronymic())
+            ->setPhoneNumber($recordRequest->getPhoneNumber())
+            ->setStreet($street)
+            ->setSurname($recordRequest->getSurname());
 
         $this->recordRepository->persist($recordFound);
         $this->recordRepository->flush();

@@ -3,41 +3,40 @@
 namespace Monastyryov\PhoneBookBundle\Factory;
 
 use Monastyryov\PhoneBookBundle\Entity\Record;
-use Monastyryov\PhoneBookBundle\Entity\Street;
 use Monastyryov\PhoneBookBundle\Exception\IdentificationNotFoundException;
 use Monastyryov\PhoneBookBundle\Exception\StreetNotFoundException;
-use Monastyryov\PhoneBookBundle\Repository\StreetRepository;
 use Monastyryov\PhoneBookBundle\Request\RecordRequest;
+use Monastyryov\PhoneBookBundle\Service\StreetService;
 use Psr\Log\LoggerInterface;
 
 class RecordFactory
 {
-    /** @var StreetRepository */
-    protected $streetRepository;
+    /** @var StreetService */
+    protected $streetService;
 
     /** @var LoggerInterface */
     protected $logger;
 
     /**
      * RecordFactory constructor.
-     * @param StreetRepository $streetRepository
+     * @param StreetService $streetService
      * @param LoggerInterface $logger
      */
-    public function __construct(StreetRepository $streetRepository, LoggerInterface $logger)
+    public function __construct(StreetService $streetService, LoggerInterface $logger)
     {
-        $this->streetRepository = $streetRepository;
+        $this->streetService = $streetService;
         $this->logger = $logger;
     }
 
     /**
      * @param RecordRequest $recordRequest
-     * @return $this
+     * @return Record
      * @throws IdentificationNotFoundException
      * @throws StreetNotFoundException
      */
     public function createByRequest(RecordRequest $recordRequest)
     {
-        $street = $this->getStreetById($recordRequest->getStreetId());
+        $street = $this->streetService->getStreetById($recordRequest->getStreetId());
         $birthTimestamp = $recordRequest->getBirthTimestamp();
         $birthDatetime = new \DateTime();
         $birthDatetime->setTimestamp($birthTimestamp);
@@ -50,27 +49,5 @@ class RecordFactory
             ->setPatronymic($recordRequest->getPatronymic())
             ->setId($recordRequest->getId())
             ->setName($recordRequest->getName());
-    }
-
-    /**
-     * @param $id
-     * @return null|Street
-     * @throws IdentificationNotFoundException
-     * @throws StreetNotFoundException
-     */
-    protected function getStreetById($id)
-    {
-        if (null === $id) {
-            $this->logger->info('Identification of street is invalid');
-            throw new IdentificationNotFoundException();
-        }
-
-        $street = $this->streetRepository->find($id);
-        if(null === $street) {
-            $this->logger->info('Street not found', ['street_id' => $id]);
-            throw new StreetNotFoundException();
-        }
-
-        return $street;
     }
 }
