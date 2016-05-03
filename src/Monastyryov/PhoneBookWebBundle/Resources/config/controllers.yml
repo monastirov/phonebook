@@ -1,0 +1,7 @@
+parameters:
+
+services:
+    phone_book_web.controller.main:
+        class: Monastyryov\PhoneBookWebBundle\Controller\MainController
+        calls:
+            - [ "setContainer", [ "@service_container" ]]

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Monastyryov\PhoneBookBundle\PhoneBookBundle(),
             new Monastyryov\PhoneBookApiBundle\PhoneBookApiBundle(),
+            new Monastyryov\PhoneBookWebBundle\PhoneBookWebBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -1,0 +1,3 @@
+_phone_book_web.app:
+    resource: "@PhoneBookWebBundle/Controller/"
+    type:     annotation
