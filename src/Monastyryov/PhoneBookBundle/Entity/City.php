@@ -3,16 +3,20 @@
 namespace Monastyryov\PhoneBookBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Monastyryov\PhoneBookBundle\Repository\CityRepository")
  * @ORM\Table(name="city")
+ * @ExclusionPolicy("all")
  */
 class City
 {
    /**
      * @var int
+     * @Expose
      * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -21,6 +25,7 @@ class City
 
     /**
      * @var string
+     * @Expose
      * @ORM\Column(type="string", length=100)
      */
     protected $title;

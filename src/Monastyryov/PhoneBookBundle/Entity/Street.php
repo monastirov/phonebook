@@ -3,16 +3,20 @@
 namespace Monastyryov\PhoneBookBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Monastyryov\PhoneBookBundle\Repository\StreetRepository")
  * @ORM\Table(name="street")
+ * @ExclusionPolicy("all")
  */
 class Street
 {
     /**
      * @var int
+     * @Expose
      * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -21,13 +25,15 @@ class Street
 
     /**
      * @var string
+     * @Expose
      * @ORM\Column(type="string", length=200)
      */
     protected $title;
 
     /**
      * @var City
-     * @ORM\ManyToOne(targetEntity="Monastyryov\PhoneBookBundle\Entity\City", inversedBy="streets")
+     * @Expose
+     * @ORM\ManyToOne(targetEntity="Monastyryov\PhoneBookBundle\Entity\City", inversedBy="streets", fetch="EAGER")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=false)
      */
     protected $city;

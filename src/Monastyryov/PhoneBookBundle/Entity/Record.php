@@ -3,15 +3,20 @@
 namespace Monastyryov\PhoneBookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity(repositoryClass="Monastyryov\PhoneBookBundle\Repository\RecordRepository")
  * @ORM\Table(name="record")
+ * @ExclusionPolicy("all")
  */
 class Record
 {
     /**
      * @var int
+     * @Expose
      * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,37 +25,43 @@ class Record
 
     /**
      * @var string
+     * @Expose
      * @ORM\Column(type="string", length=200, nullable=false)
      */
     protected $name;
 
     /**
      * @var string
+     * @Expose
      * @ORM\Column(type="string", length=200, nullable=false)
      */
     protected $surname;
 
     /**
      * @var string
+     * @Expose
      * @ORM\Column(type="string", length=200, nullable=false)
      */
     protected $patronymic;
 
     /**
      * @var Street
-     * @ORM\ManyToOne(targetEntity="Monastyryov\PhoneBookBundle\Entity\Street", inversedBy="records")
+     * @Expose
+     * @ORM\ManyToOne(targetEntity="Monastyryov\PhoneBookBundle\Entity\Street", inversedBy="records", fetch="EAGER")
      * @ORM\JoinColumn(name="street_id", referencedColumnName="id", nullable=false)
      */
     protected $street;
 
     /**
      * @var \DateTime
+     * @Expose
      * @ORM\Column(name="birth_datetime", type="datetime", nullable=false)
      */
     protected $birthDatetime;
 
     /**
      * @var string
+     * @Expose
      * @ORM\Column(type="string", length=15, nullable=false)
      */
     protected $phoneNumber;
