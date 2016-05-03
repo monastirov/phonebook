@@ -6,6 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
+ * @todo Можно сделать независимо от конкретной БД, пока только mysql
  * Auto-generated Migration: Please modify to your needs!
  */
 class Version20160502224606 extends AbstractMigration
