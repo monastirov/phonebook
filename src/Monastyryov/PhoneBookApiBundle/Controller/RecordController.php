@@ -85,4 +85,20 @@ class RecordController extends FOSRestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Route("/phone_book/records/{id}", name="phone_book_api.record.delete")
+     * @Method({"DELETE"})
+     * @param int $id
+     * @return Response
+     */
+    public function deleteRecord($id)
+    {
+        $view = $this->view()
+            ->setFormat('json')
+            ->setStatusCode(200);
+
+        $this->recordService->deleteRecord($id);
+        return $this->handleView($view);
+    }
 }
