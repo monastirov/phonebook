@@ -55,6 +55,8 @@ class Record
     /**
      * @var \DateTime
      * @Expose
+     * @Serializer\Type("DateTime<'U'>")
+     * @Serializer\SerializedName("birth_timestamp")
      * @ORM\Column(name="birth_datetime", type="datetime", nullable=false)
      */
     protected $birthDatetime;
