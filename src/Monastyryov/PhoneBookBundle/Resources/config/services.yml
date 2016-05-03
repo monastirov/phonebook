@@ -9,3 +9,5 @@ services:
       class: Monastyryov\PhoneBookBundle\Service\RecordService
       arguments:
           - "@phone_book.repository.record"
+          - "@phone_book.factory.record"
+          - "@logger"
