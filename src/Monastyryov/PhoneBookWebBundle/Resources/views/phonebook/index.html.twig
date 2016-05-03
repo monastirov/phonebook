@@ -1,5 +1,53 @@
-{% extends 'layout.html.twig' %}
+{% extends '@PhoneBookWeb/_common/layout.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/common/bootstrap.min.css') }}">
+{% endblock %}
 {% block body %}
+    <h1>Справочник</h1>
+    <div class="phonebook">
+        <table class="phonebook-table" style="width: 600px;">
+            <tr>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Отчество</td>
+                <td>Телефон</td>
+            </tr>
+        </table>
+    </div>
+    {% include '@PhoneBookWeb/phonebook/template/record.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+    {#@todo нужно минифициаровать все js и скомпоновать в один с помощью грунта#}
+    <script src="{{ asset('js/common/jquery-2.2.3.min.js') }}"></script>
+    <script src="{{ asset('js/common/underscore-min.js') }}"></script>
+    <script src="{{ asset('js/common/backbone-min.js') }}"></script>
+    <script src="{{ asset('js/phonebook/record/record.model.js') }}"></script>
+    <script src="{{ asset('js/phonebook/record/record.collection.js') }}"></script>
+    <script src="{{ asset('js/phonebook/record/record.view.js') }}"></script>
+    <script src="{{ asset('js/phonebook/app/app.view.js') }}"></script>
+    <script>
+        (function($){
+            $.ajaxSetup({ cache: false });
+            $.fn.initApp = function(options) {
+                if (!options) {
+                    options = {};
+                }
 
+                var eventsCommon = _.extend({}, Backbone.Events);
+                var recordCollection = new RecordCollection();
+                recordCollection.url = options.urls.records;
+
+                var app = new AppView({
+                    collection: recordCollection,
+                    eventsCommon: eventsCommon
+                });
+            };
+            $.fn.initApp({
+                urls : {
+                    records : '{{ path('phone_book_api.record.all') }}'
+                }
+            });
+        })(jQuery);
+    </script>
 {% endblock %}
