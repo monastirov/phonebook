@@ -3,3 +3,4 @@ phone_book:
 
 phone_book_api:
     resource: "@PhoneBookApiBundle/Resources/config/routing.yml"
+    prefix:   /api/
