@@ -39,9 +39,6 @@ var AppView = Backbone.View.extend({
         this.$el.append(view.render().el);
     },
 
-    removeOneRecord: function(record) {
-    },
-
     addAllRecords: function() {
         this.collection.each(this.addOneRecord);
     }
