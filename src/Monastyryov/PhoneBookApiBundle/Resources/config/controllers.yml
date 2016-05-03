@@ -1,0 +1,9 @@
+parameters:
+
+services:
+    phone_book_api.controller.record:
+        class: Monastyryov\PhoneBookApiBundle\Controller\RecordController
+        arguments:
+            - "@phone_book.service.record"
+        calls:
+            - [ "setContainer", [ "@service_container" ]]
