@@ -64,19 +64,20 @@ class RecordController extends FOSRestController
     }
 
     /**
-     * @Route("/phone_book/records", name="phone_book_api.record.update")
+     * @Route("/phone_book/records/{id}", name="phone_book_api.record.update")
      * @Method({"PUT"})
+     * @param int $id
      * @param Request $request
      * @return Response
      */
-    public function updateRecord(Request $request)
+    public function updateRecord($id, Request $request)
     {
         $record = new RecordRequest();
-        $form = $this->createForm(RecordRequestType::class, $record);
+        $form = $this->createForm(RecordRequestType::class, $record, ['method' => 'PUT']);
         $form->handleRequest($request);
-
         $view = $this->view()->setFormat('json')->setStatusCode(400);
         if ($form->isValid()) {
+            $record->setId($id);
             $this->recordService->updateRecord($record);
             $view->setStatusCode(200);
             return $this->handleView($view);
