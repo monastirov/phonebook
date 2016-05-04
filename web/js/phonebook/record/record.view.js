@@ -3,9 +3,8 @@ var RecordView = Backbone.View.extend({
     className: "record",
     template: _.template($('script#record-template').html()),
     events: {
-        "click"   : "toggleSelected"
+        "click .delete" : "clear"
     },
-
     initialize: function(options) {
         this.model.on('change', this.render, this);
         this.model.on('remove', this.clearView, this);
