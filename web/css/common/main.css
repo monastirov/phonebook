@@ -20,6 +20,9 @@
 
 .phonebook tr.editing .edit {
     display: block;
+    width: 100px;
+    margin: 0 auto;
+    text-align:center;
 }
 
 .phonebook tr.editing .destroy {
@@ -32,6 +35,10 @@
 
 .phonebook-table {
     width:1200px;
+}
+
+.phonebook td.record-item-simple {
+    width: 160px;
 }
 
 .phonebook td {
