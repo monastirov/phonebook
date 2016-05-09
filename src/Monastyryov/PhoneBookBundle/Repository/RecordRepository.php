@@ -11,6 +11,6 @@ class RecordRepository extends BaseRepository
      */
     public function findAll()
     {
-        return $this->findBy([], ['id' => 'DESC']);
+        return $this->findBy([], ['id' => 'ASC']);
     }
 }
