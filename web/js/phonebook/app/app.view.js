@@ -1,7 +1,13 @@
 var AppView = Backbone.View.extend({
 
-    el: $(".phonebook-table"),
-    loader: $('#initial-loader'),
+    el: $(".phonebook"),
+    elTable: $(".phonebook-table"),
+    elLoader: $('#initial-loader'),
+    elAddRecordButton: $('.add-record-button'),
+
+    events: {
+        "click .add-record-button" : "addEmptyRecord"
+    },
 
     initialize: function(options) {
         this.cityCollection = options.cityCollection;
@@ -13,7 +19,7 @@ var AppView = Backbone.View.extend({
             self.fetchCollection(self.collection, {async: true});
         }, 10000);
 
-        this.loader.hide();
+        this.elLoader.hide();
     },
 
     bindings: function() {
@@ -35,7 +41,18 @@ var AppView = Backbone.View.extend({
 
     addOneRecord: function(record) {
         var view = new RecordView({model: record, cityCollection: this.cityCollection});
-        this.$el.append(view.render().el);
+        this.elTable.append(view.render().el);
+    },
+
+    addEmptyRecord: function() {
+        this.elLoader.show();
+        this.elAddRecordButton.hide();
+        this.collection.create(new Record(), {async: false});
+        this.fetchCollection(this.collection, {async: false});
+        var lastModel = this.collection.at(this.collection.length - 1);
+        lastModel.trigger('record_edit');
+        this.elLoader.hide();
+        this.elAddRecordButton.show();
     },
 
     addAllRecords: function() {

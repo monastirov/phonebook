@@ -1,10 +1,19 @@
 var Record = Backbone.Model.extend({
+    defaults: {
+        birth_timestamp: 0,
+        street: null,
+        name: '',
+        surname: '',
+        patronymic: '',
+        phone_number: ''
+    },
+
     clear: function() {
         this.destroy();
     },
 
     sync: function (method, model, options) {
-        if (method == 'update') {
+        if (method == 'update' || method == 'create') {
             model.set("record_request", {
                 "name":model.get('name'),
                 "surname":model.get('surname'),
