@@ -1,10 +1,32 @@
 <script type="text/template" id="record-template">
-    <td><%=name %></td>
-    <td><%=surname %></td>
-    <td><%=patronymic %></td>
-    <td><% print(new Date(birth_timestamp*1000)) %></td>
-    <td><%=phone_number %></td>
-    <td><%=street.title %></td>
-    <td><%=street.city.title %></td>
-    <td><a href="#" class="delete">X</a></td>
+    <td class="record-item-simple">
+        <label><%=name %></label>
+        <input name="name" id= "name" class="edit" value="<%=name %>">
+    </td>
+    <td class="record-item-simple">
+        <label><%=surname %></label>
+        <input name="surname" id= "surname" class="edit" value="<%=surname %>">
+    </td>
+    <td class="record-item-simple">
+        <label><%=patronymic %></label>
+        <input name="patronymic" id= "patronymic" class="edit" value="<%=patronymic %>">
+    </td>
+    <td class="record-item-simple">
+        <label><% print(new Date(birth_timestamp*1000)) %></label>
+    </td>
+    <td class="record-item-simple">
+        <label><%=phone_number %></label>
+        <input name="phone_number" id= "phone_number" class="edit" value="<%=phone_number %>">
+    </td>
+    <td class="record-item-simple">
+        <label><%=street.title %></label>
+        <select class="edit street" id="street" name="street" placeholder="Улица"></select>
+    </td>
+    <td class="record-item-simple">
+        <label><%=street.city.title %></label>
+        <select class="edit city" id="city" name="state" placeholder="Город"></select>
+    </td>
+    <td>
+        <a href="#" class="destroy">X</a>
+    </td>
 </script>
