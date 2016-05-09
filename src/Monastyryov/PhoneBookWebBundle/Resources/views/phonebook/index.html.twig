@@ -21,24 +21,6 @@
             </tr>
         </table>
     </div>
-
-    <div id="main">
-        <div>
-            <select class="city" id="city" name="state" placeholder="Select a City"></select>
-        </div>
-
-        <div>
-            <select class="street" id="street" name="street" placeholder="Select a Street"></select>
-        </div>
-
-        <div>
-            City: <span id="stateDisplay"></span>
-        </div>
-        <div>
-            Street: <span id="cityDisplay"></span>
-        </div>
-    </div>
-
     {% include '@PhoneBookWeb/phonebook/template/record.html.twig' %}
 {% endblock %}
 {% block javascripts %}
