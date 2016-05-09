@@ -1,0 +1,19 @@
+.phonebook tr .edit {
+    display: none;
+}
+
+.phonebook tr .destroy {
+    display: none;
+}
+
+.phonebook tr.editing .edit {
+    display: block;
+}
+
+.phonebook tr.editing .destroy {
+    display: block;
+}
+
+.phonebook tr.editing .record-item-simple label{
+    display: none;
+}
