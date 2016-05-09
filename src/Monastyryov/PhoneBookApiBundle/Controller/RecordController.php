@@ -3,6 +3,7 @@
 namespace Monastyryov\PhoneBookApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use JMS\Serializer\SerializationContext;
 use Monastyryov\PhoneBookApiBundle\Form\Type\RecordRequestType;
 use Monastyryov\PhoneBookBundle\Request\RecordRequest;
 use Monastyryov\PhoneBookBundle\Service\RecordService;
@@ -36,8 +37,12 @@ class RecordController extends FOSRestController
      */
     public function getAll()
     {
+        $context = SerializationContext::create()->setGroups(['records', 'default']);
         $data = $this->recordService->getAll();
-        $view = $this->view($data)->setFormat('json');
+        $view = $this
+            ->view($data)
+            ->setFormat('json')
+            ->setSerializationContext($context);
         return $this->handleView($view);
     }
 
