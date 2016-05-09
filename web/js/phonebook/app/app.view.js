@@ -4,12 +4,13 @@ var AppView = Backbone.View.extend({
     loader: $('#initial-loader'),
 
     initialize: function(options) {
-        this.eventsCommon = options.eventsCommon;
+        this.cityCollection = options.cityCollection;
         this.bindings();
-        this.fetchRecords(this.collection, {async: false});
+        this.fetchCollection(this.cityCollection, {async: false}, 'Не смог загрузить города :(');
+        this.fetchCollection(this.collection, {async: false}, 'Не смог загрузить записи справочника :(');
         var self = this;
         setInterval(function() {
-            self.fetchRecords(self.collection, {async: true});
+            self.fetchCollection(self.collection, {async: true});
         }, 10000);
 
         this.loader.hide();
@@ -17,25 +18,24 @@ var AppView = Backbone.View.extend({
 
     bindings: function() {
         this.collection.bind('add', this.addOneRecord, this);
-        this.collection.bind('remove', this.removeOneRecord, this);
         this.collection.bind('reset', this.addAllRecords, this);
         this.collection.bind('all', this.render, this);
     },
 
-    fetchRecords: function(collection, options) {
+    fetchCollection: function(collection, options, errorMessage) {
         //@todo сделать нормальную обработку ошибок
         collection.fetch(options).success(function(result){
             if (result.error){
-                alert("Не смог загрузить записи справочника");
+                alert(errorMessage);
             }
         }).error(function(){
-            alert("Не смог загрузить записи справочника");
+            alert(errorMessage);
         });
         console.log(collection);
     },
 
     addOneRecord: function(record) {
-        var view = new RecordView({model: record});
+        var view = new RecordView({model: record, cityCollection: this.cityCollection});
         this.$el.append(view.render().el);
     },
 
