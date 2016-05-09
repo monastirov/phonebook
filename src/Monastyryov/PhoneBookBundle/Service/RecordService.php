@@ -76,7 +76,11 @@ class RecordService
     public function updateRecord(RecordRequest $recordRequest)
     {
         $recordFound = $this->getRecordById($recordRequest->getId());
-        $street = $this->streetService->getStreetById($recordRequest->getStreetId());
+        $street = null;
+        if (null !== $recordRequest->getStreetId()) {
+            $street = $this->streetService->getStreetById($recordRequest->getStreetId());
+        }
+
         $birthDatetime = new \DateTime();
         $birthDatetime->setTimestamp($recordRequest->getBirthTimestamp());
 

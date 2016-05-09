@@ -36,7 +36,11 @@ class RecordFactory
      */
     public function createByRequest(RecordRequest $recordRequest)
     {
-        $street = $this->streetService->getStreetById($recordRequest->getStreetId());
+        $street = null;
+        if (null !== $recordRequest->getStreetId()) {
+            $street = $this->streetService->getStreetById($recordRequest->getStreetId());
+        }
+
         $birthTimestamp = $recordRequest->getBirthTimestamp();
         $birthDatetime = new \DateTime();
         $birthDatetime->setTimestamp($birthTimestamp);
