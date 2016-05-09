@@ -12,7 +12,24 @@
         <input name="patronymic" id= "patronymic" class="edit" value="<%=patronymic %>">
     </td>
     <td class="record-item-simple">
-        <label><% print(new Date(birth_timestamp*1000)) %></label>
+        <label><%
+            var d = new Date(birth_timestamp*1000), // or d = new Date(date)
+            fragments = [
+                d.getDate(),
+                d.getMonth() + 1,
+                d.getFullYear()
+            ];
+            print(fragments.join('/'));
+            %></label>
+        <input name="birth_date_formated" id= "birth_date_formated" class="edit" value="<%
+            var d = new Date(birth_timestamp*1000), // or d = new Date(date)
+            fragments = [
+                d.getDate(),
+                d.getMonth() + 1,
+                d.getFullYear()
+            ];
+            print(fragments.join('/'));
+            %>">
     </td>
     <td class="record-item-simple">
         <label><%=phone_number %></label>
@@ -20,11 +37,11 @@
     </td>
     <td class="record-item-simple">
         <label><%=street.title %></label>
-        <select class="edit street" id="street" name="street" placeholder="Улица"></select>
+        <select class="edit street" placeholder="Улица"></select>
     </td>
     <td class="record-item-simple">
         <label><%=street.city.title %></label>
-        <select class="edit city" id="city" name="city" placeholder="Город"></select>
+        <select class="edit city" id="city_id" name="city_id" placeholder="Город"></select>
     </td>
     <td>
         <a href="#" class="edit-button">E</a>
