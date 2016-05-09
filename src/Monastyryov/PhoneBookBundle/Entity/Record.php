@@ -43,10 +43,10 @@ class Record
     protected $patronymic;
 
     /**
-     * @var Street
+     * @var Street|null
      * @Groups({"default"})
      * @ORM\ManyToOne(targetEntity="Monastyryov\PhoneBookBundle\Entity\Street", inversedBy="records", fetch="EAGER")
-     * @ORM\JoinColumn(name="street_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="street_id", referencedColumnName="id", nullable=true)
      */
     protected $street;
 
@@ -105,7 +105,7 @@ class Record
     }
 
     /**
-     * @return Street
+     * @return Street|null
      */
     public function getStreet()
     {
@@ -113,10 +113,10 @@ class Record
     }
 
     /**
-     * @param Street $street
+     * @param Street|null $street
      * @return $this
      */
-    public function setStreet(Street $street)
+    public function setStreet(Street $street = null)
     {
         $this->street = $street;
 
