@@ -4,19 +4,17 @@ namespace Monastyryov\PhoneBookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="Monastyryov\PhoneBookBundle\Repository\RecordRepository")
  * @ORM\Table(name="record")
- * @ExclusionPolicy("all")
  */
 class Record
 {
     /**
      * @var int
-     * @Expose
+     * @Groups({"default"})
      * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -25,28 +23,28 @@ class Record
 
     /**
      * @var string
-     * @Expose
+     * @Groups({"default"})
      * @ORM\Column(type="string", length=200, nullable=false)
      */
     protected $name;
 
     /**
      * @var string
-     * @Expose
+     * @Groups({"default"})
      * @ORM\Column(type="string", length=200, nullable=false)
      */
     protected $surname;
 
     /**
      * @var string
-     * @Expose
+     * @Groups({"default"})
      * @ORM\Column(type="string", length=200, nullable=false)
      */
     protected $patronymic;
 
     /**
      * @var Street
-     * @Expose
+     * @Groups({"default"})
      * @ORM\ManyToOne(targetEntity="Monastyryov\PhoneBookBundle\Entity\Street", inversedBy="records", fetch="EAGER")
      * @ORM\JoinColumn(name="street_id", referencedColumnName="id", nullable=false)
      */
@@ -54,7 +52,7 @@ class Record
 
     /**
      * @var \DateTime
-     * @Expose
+     * @Groups({"default"})
      * @Serializer\Type("DateTime<'U'>")
      * @Serializer\SerializedName("birth_timestamp")
      * @ORM\Column(name="birth_datetime", type="datetime", nullable=false)
@@ -63,7 +61,7 @@ class Record
 
     /**
      * @var string
-     * @Expose
+     * @Groups({"default"})
      * @ORM\Column(type="string", length=15, nullable=false)
      */
     protected $phoneNumber;
