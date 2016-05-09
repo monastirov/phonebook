@@ -36,11 +36,19 @@
         <input name="phone_number" id= "phone_number" class="edit" value="<%=phone_number %>">
     </td>
     <td class="record-item-simple">
-        <label><%=street.title %></label>
+        <label><%
+            if(street !== null) {
+                print(street.title)
+            }
+            %></label>
         <select class="edit street" placeholder="Улица"></select>
     </td>
     <td class="record-item-simple">
-        <label><%=street.city.title %></label>
+        <label><%
+            if(street !== null) {
+                print(street.city.title)
+            }
+            %></label>
         <select class="edit city" id="city_id" name="city_id" placeholder="Город"></select>
     </td>
     <td>
