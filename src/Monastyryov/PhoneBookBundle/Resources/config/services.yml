@@ -18,3 +18,8 @@ services:
         arguments:
             - "@phone_book.repository.street"
             - "@logger"
+
+    phone_book.service.city:
+        class: Monastyryov\PhoneBookBundle\Service\CityService
+        arguments:
+            - "@phone_book.repository.city"
