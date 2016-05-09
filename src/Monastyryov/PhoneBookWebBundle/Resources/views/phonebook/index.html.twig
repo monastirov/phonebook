@@ -2,6 +2,9 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/common/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common/main.css') }}">
 {% endblock %}
 {% block body %}
     <h1>Справочник</h1>
@@ -18,6 +21,24 @@
             </tr>
         </table>
     </div>
+
+    <div id="main">
+        <div>
+            <select class="city" id="city" name="state" placeholder="Select a City"></select>
+        </div>
+
+        <div>
+            <select class="street" id="street" name="street" placeholder="Select a Street"></select>
+        </div>
+
+        <div>
+            City: <span id="stateDisplay"></span>
+        </div>
+        <div>
+            Street: <span id="cityDisplay"></span>
+        </div>
+    </div>
+
     {% include '@PhoneBookWeb/phonebook/template/record.html.twig' %}
 {% endblock %}
 {% block javascripts %}
@@ -25,9 +46,15 @@
     <script src="{{ asset('js/common/jquery-2.2.3.min.js') }}"></script>
     <script src="{{ asset('js/common/underscore-min.js') }}"></script>
     <script src="{{ asset('js/common/backbone-min.js') }}"></script>
+    <script src="{{ asset('js/common/select2.min.js') }}"></script>
+    <script src="{{ asset('js/common/lodash.js') }}"></script>
+    <script src="{{ asset('js/common/backbone.stickit.js') }}"></script>
     <script src="{{ asset('js/phonebook/record/record.model.js') }}"></script>
     <script src="{{ asset('js/phonebook/record/record.collection.js') }}"></script>
     <script src="{{ asset('js/phonebook/record/record.view.js') }}"></script>
+    <script src="{{ asset('js/phonebook/city/city.model.js') }}"></script>
+    <script src="{{ asset('js/phonebook/city/city.collection.js') }}"></script>
+    <script src="{{ asset('js/phonebook/location/location.view.js') }}"></script>
     <script src="{{ asset('js/phonebook/app/app.view.js') }}"></script>
     <script>
         (function($){
@@ -37,18 +64,22 @@
                     options = {};
                 }
 
-                var eventsCommon = _.extend({}, Backbone.Events);
+                var cityCollection = new CityCollection();
+                cityCollection.url = options.urls.cities;
+
                 var recordCollection = new RecordCollection();
                 recordCollection.url = options.urls.records;
 
-                var app = new AppView({
+                new AppView({
                     collection: recordCollection,
-                    eventsCommon: eventsCommon
+                    cityCollection: cityCollection
                 });
             };
+
             $.fn.initApp({
                 urls : {
-                    records : '{{ path('phone_book_api.record.all') }}'
+                    records : '{{ path('phone_book_api.record.all') }}',
+                    cities : '{{ path('phone_book_api.city.all') }}'
                 }
             });
         })(jQuery);
