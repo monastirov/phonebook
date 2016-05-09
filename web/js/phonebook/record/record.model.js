@@ -13,7 +13,6 @@ var Record = Backbone.Model.extend({
                 "phone_number":model.get('phone_number'),
                 "street_id": model.get('street_id')
             });
-            console.log(model);
         }
 
         return Backbone.sync.call(this, method, model, options);
