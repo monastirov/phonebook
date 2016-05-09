@@ -6,6 +6,18 @@
     display: none;
 }
 
+.phonebook .save-button {
+    display: none;
+}
+
+.phonebook .editing .save-button {
+    display: block;
+}
+
+.phonebook .editing .edit-button {
+    display: none;
+}
+
 .phonebook tr.editing .edit {
     display: block;
 }
@@ -16,4 +28,13 @@
 
 .phonebook tr.editing .record-item-simple label{
     display: none;
+}
+
+.phonebook-table {
+    width:1200px;
+}
+
+.phonebook td {
+    text-align:center;
+    vertical-align:middle;
 }
