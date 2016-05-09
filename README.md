@@ -1,4 +1,4 @@
-PhoneBook Test Project
+PhoneBook - test project
 
 INSTALL
 =========
