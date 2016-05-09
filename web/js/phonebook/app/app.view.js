@@ -31,7 +31,6 @@ var AppView = Backbone.View.extend({
         }).error(function(){
             alert(errorMessage);
         });
-        console.log(collection);
     },
 
     addOneRecord: function(record) {
